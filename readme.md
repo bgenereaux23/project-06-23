@@ -13,7 +13,11 @@ Note: I ran this model on a realivly low epoch with information that was askew. 
 4. Since using teh preflashed SD card, there sould be a docker container. This is accesable by implementing this code. Change directories into jetson-inference/python/training/detection/ssd
 5. Then run this code python3 train_ssd.py --dataset-type=voc --data=data/<YOUR-DATASET> --model-dir=models/<YOUR-MODEL>. This will train the data. 
 6a. After it's finished training, run python3 onnx_export.py --model-dir=models/<YOUR-MODEL> to export the model.
-6b. To run the program, 
-7. The model is up and running, and so you should just put your face in clear view infront of the camera and watch as it tries to predict your age!
+6b. To run the program, switch over to a monitor with a keyboard and mouse. Plug the nano into a power cord, and you should see a NVIDIA background
+7. Run this code: NET=models/<YOUR-MODEL>
+detectnet --model=$NET/ssd-mobilenet.onnx --labels=$NET/labels.txt \
+          --input-blob=input_0 --output-cvg=scores --output-bbox=boxes \
+   /dev/video0
+8. Now you should see live output, and it will detect where the surgical sponges are!
 
-[View a video explanation here](video link)
+View a video explanation here: https://drive.google.com/file/d/1EPsMKOaE4ylFXI3Muf5uuR3lO4_jefUE/view?usp=drive_link
